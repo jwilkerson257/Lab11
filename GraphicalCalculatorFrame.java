@@ -269,7 +269,7 @@ public class GraphicalCalculatorFrame extends JFrame
 					{
 						operands[1] = Integer.parseInt(content);
 					}
-					else
+					if(selectedRegion == 4)
 					{
 						operands[2] = Integer.parseInt(content);
 					}
@@ -318,15 +318,6 @@ public class GraphicalCalculatorFrame extends JFrame
 				temp = operands[0] * operands[1];
 				
 			}
-			else if(operators[0].equals("/"))
-			{
-				temp = operands[0] / operands[1];
-				
-			}
-			else
-			{
-				temp = 0;
-			}
 			
 			
 			if(operators[1].equals("+"))
@@ -334,21 +325,15 @@ public class GraphicalCalculatorFrame extends JFrame
 				result = temp + operands[2];
 				
 			}
-			else if(operators[0].equals("-"))
+			else if(operators[1].equals("-"))
 			{
 				result = temp - operands[2];
 				
 			}
-			else if(operators[0].equals("*"))
+			else if(operators[1].equals("*"))
 			{
 				result = temp * operands[2];
-				
 			}
-			else
-			{
-				result = temp;
-			}
-			
 			return result;
 		}
 
@@ -479,8 +464,9 @@ public class GraphicalCalculatorFrame extends JFrame
          * If the set operation succeeds, clear any error messages.
          */
         setOperand.addActionListener((e) -> {
-        		// TODO: attempt to modify the selected region in gcPanel with the new operand value.
-        	}
+        			// TODO: attempt to modify the selected region in gcPanel with the new operand value.
+        			gcPanel.setSelectedRegionContents(operandEntry.getText());
+        		}
         );
 
         /*
@@ -494,7 +480,21 @@ public class GraphicalCalculatorFrame extends JFrame
          * If the set operation succeeds, clear any error messages.
          */
         setOperator.addActionListener((e) -> {
-    		// TODO: attempt to modify the selected region in gcPanel with the new operator value.
+    			// TODO: attempt to modify the selected region in gcPanel with the new operator value.
+        		String operator = "";
+        		if(add.isSelected())
+        		{
+        			operator = "+";
+        		}
+        		if(subtract.isSelected())
+        		{
+        			operator = "-";
+        		}
+        		if(multiply.isSelected())
+        		{
+        			operator = "*";
+        		}
+        		gcPanel.setSelectedRegionContents(operator);
     		}
         );
 
