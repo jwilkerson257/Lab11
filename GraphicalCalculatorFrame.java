@@ -235,7 +235,7 @@ public class GraphicalCalculatorFrame extends JFrame
 		 */
 		public boolean setSelectedRegionContents(String content)
 		{
-
+			boolean success = true;
 			/* TODO: attempt to set the value of the selected region.
 			 *
 			 * Remember that the regions are associated with the operand and operators as such:
@@ -273,7 +273,6 @@ public class GraphicalCalculatorFrame extends JFrame
 					{
 						operands[2] = Integer.parseInt(content);
 					}
-					return true;
 				}
 			}
 			// Operators
@@ -290,7 +289,7 @@ public class GraphicalCalculatorFrame extends JFrame
 			}
 			this.repaint();
 
-			return false;
+			return success;
 		}
 
 		/**
