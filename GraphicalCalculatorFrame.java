@@ -249,7 +249,7 @@ public class GraphicalCalculatorFrame extends JFrame
 			 */
 			
 			// Operands
-			if(selectedRegion == 0 || selectedRegion == 2 || selectedRegion == 4)
+			if(content.charAt(0) >= '0' && content.charAt(0) <= '9')
 			{
 				if(content.length() > 1)
 				{
@@ -276,24 +276,29 @@ public class GraphicalCalculatorFrame extends JFrame
 				}
 			}
 			// Operators
-			else
+			if(content.charAt(0) == '+' || content.charAt(0) == '-' || content.charAt(0) == '*')
 			{
 				if(content.length() > 1)
 				{
 					return false;
 				}
-				if(content.charAt(0) < '0' || content.charAt(0) > '0' || content.charAt(0) == '0')
-				{
-					return false;
-				}
+				
 				if(selectedRegion == 1)
 				{
 					operators[0] = content;
 				}
-				else
+				if(selectedRegion == 3)
 				{
 					operators[1] = content;
 				}
+				else
+				{
+					return false;
+				}
+			}
+			else
+			{
+				return false;
 			}
 			this.repaint();
 
@@ -473,6 +478,7 @@ public class GraphicalCalculatorFrame extends JFrame
          */
         setOperand.addActionListener((e) -> {
         			// TODO: attempt to modify the selected region in gcPanel with the new operand value.
+        			
         			if(gcPanel.setSelectedRegionContents(operandEntry.getText()) == false)
         			{
         				errorMessage.setText("Failed to set operand value");
@@ -499,25 +505,28 @@ public class GraphicalCalculatorFrame extends JFrame
     			// TODO: attempt to modify the selected region in gcPanel with the new operator value.
         		String operator = "";
         		if(add.isSelected())
-        		{
-        			operator = "+";
-        			errorMessage.setText("");
-        		}
-        		if(subtract.isSelected())
-        		{
-        			operator = "-";
-        			errorMessage.setText("");
-        		}
-        		if(multiply.isSelected())
-        		{
-        			operator = "*";
-        			errorMessage.setText("");
-        		}
-        		else
+    			{
+    				operator = "+";
+    				errorMessage.setText("");
+    			}
+    			if(subtract.isSelected())
+    			{
+    				operator = "-";
+    				errorMessage.setText("");
+    			}
+    			if(multiply.isSelected())
+    			{
+    				operator = "*";
+    				errorMessage.setText("");
+    			}
+        		if(gcPanel.setSelectedRegionContents(operator) == false)
         		{
         			errorMessage.setText("Failed to set operator value");
         		}
-        		gcPanel.setSelectedRegionContents(operator);
+        		else
+        		{
+        			gcPanel.setSelectedRegionContents(operator);
+        		}
     		}
         );
 
