@@ -247,9 +247,8 @@ public class GraphicalCalculatorFrame extends JFrame
 			 *
 			 * Return false if the set operation cannot be done.
 			 */
-			
 			// Operands
-			if(content.charAt(0) >= '0' && content.charAt(0) <= '9')
+			if(selectedRegion == 0 || selectedRegion == 2 || selectedRegion == 4)
 			{
 				if(content.length() > 1)
 				{
@@ -276,13 +275,12 @@ public class GraphicalCalculatorFrame extends JFrame
 				}
 			}
 			// Operators
-			if(content.charAt(0) == '+' || content.charAt(0) == '-' || content.charAt(0) == '*')
+			else if(content.charAt(0) == '+' || content.charAt(0) == '-' || content.charAt(0) == '*')
 			{
 				if(content.length() > 1)
 				{
 					return false;
 				}
-				
 				if(selectedRegion == 1)
 				{
 					operators[0] = content;
@@ -290,10 +288,6 @@ public class GraphicalCalculatorFrame extends JFrame
 				if(selectedRegion == 3)
 				{
 					operators[1] = content;
-				}
-				else
-				{
-					return false;
 				}
 			}
 			else
@@ -509,12 +503,12 @@ public class GraphicalCalculatorFrame extends JFrame
     				operator = "+";
     				errorMessage.setText("");
     			}
-    			if(subtract.isSelected())
+        		else if(subtract.isSelected())
     			{
     				operator = "-";
     				errorMessage.setText("");
     			}
-    			if(multiply.isSelected())
+        		else if(multiply.isSelected())
     			{
     				operator = "*";
     				errorMessage.setText("");
