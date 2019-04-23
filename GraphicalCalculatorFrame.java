@@ -235,7 +235,6 @@ public class GraphicalCalculatorFrame extends JFrame
 		 */
 		public boolean setSelectedRegionContents(String content)
 		{
-			boolean success = true;
 
 			/* TODO: attempt to set the value of the selected region.
 			 *
@@ -248,10 +247,50 @@ public class GraphicalCalculatorFrame extends JFrame
 			 *
 			 * Return false if the set operation cannot be done.
 			 */
-
+			
+			// Operands
+			if(selectedRegion == 0 || selectedRegion == 2 || selectedRegion == 4)
+			{
+				if(content.length() > 1)
+				{
+					return false;
+				}
+				if(content.charAt(0) < '0' || content.charAt(0) > '9')
+				{
+					return false;
+				}
+				else
+				{
+					if(selectedRegion == 0)
+					{
+						operands[0] = Integer.parseInt(content);
+					}
+					if(selectedRegion == 2)
+					{
+						operands[1] = Integer.parseInt(content);
+					}
+					else
+					{
+						operands[2] = Integer.parseInt(content);
+					}
+					return true;
+				}
+			}
+			// Operators
+			else
+			{
+				if(selectedRegion == 1)
+				{
+					operators[0] = content;
+				}
+				else
+				{
+					operators[1] = content;
+				}
+			}
 			this.repaint();
 
-			return success;
+			return false;
 		}
 
 		/**
